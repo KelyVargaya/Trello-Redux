@@ -25,13 +25,13 @@ const SingIn = ({  }) => {
           </FormGroup>
           <FormGroup>
             <InputGroup className="input">
-              <FormControl id="n" type="text" placeholder = "add comments" />
+              <FormControl id="n" type="text" placeholder = "password" />
             </InputGroup>
           </FormGroup>
           <button type="submit" name="submit" value="submit">SING IN</button>
           
         </form>
-         <NavLink to="/sing_up" className='text-navlink'>Createnow account</NavLink>
+         <NavLink to="/sing_up" className='text-navlink'>Create new account</NavLink>
             </center>
 			
 		</div>
