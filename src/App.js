@@ -12,8 +12,10 @@ import {
 import {Button, FormGroup, FormControl, InputGroup } from 'react-bootstrap';
 import {connect} from 'redux-zero/react';
 import './App.css';
-import SingIn from './sing_in.js'
-import SingUp from './sing_up.js'
+import SingIn from './sing_in.js';
+import SingUp from './sing_up.js';
+import Boards from './board.js'
+
 
 const App = ({ trello }) => {
   return (
@@ -25,6 +27,7 @@ const App = ({ trello }) => {
             
             <Route exact path="/sing_up" render={() =><SingUp/>}/>
             <Route exact path="/sing_in" render={() =><SingIn/>}/>
+             <Route exact path="/boards" render={() =><Boards/>}/>
             <Route render={() => <Redirect to="/sing_in" />} />
           </Switch>
         </div>

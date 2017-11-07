@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './sing_in.css';
 import {Button, From, FormGroup, FormControl, InputGroup } from 'react-bootstrap';
 import {NavLink} from 'react-router-dom'
 import logo from './img/logito.png';
@@ -35,8 +35,8 @@ const SingUp = ({}) => {
               <FormControl id="n" type="text" placeholder = "Conirm Password" />
             </InputGroup>
           </FormGroup>
-          <button type="submit" name="submit" value="submit">SING UP</button><br/>
-          <NavLink to="/sing_in" className="btn" >Sing In</NavLink>
+          <NavLink to="/boards"><button className="boton">SING UP</button></NavLink>
+          <NavLink to="/sing_in" className="text-navlink" >Sing In</NavLink>
         </form>
         </center>
     </div>
