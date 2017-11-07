@@ -24,6 +24,9 @@ const Boards = ({ }) => {
                  </center>
             </header>
              <h4><Glyphicon glyph="user" />My Boards</h4>
+        <div className="new">
+            new board...
+        </div>
         </div>
     );
 
