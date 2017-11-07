@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import './sing_in.css';
-import { NavLink } from 'react-router-dom';
 import {Button, FormGroup, FormControl, InputGroup } from 'react-bootstrap';
 import logo from './img/logito.png';
-const SingIn = ({ dish, index }) => {
+import {
+	BrowserRouter,
+	Route,
+	Switch,
+	Redirect,
+    Nav,
+    NavLink
+} from 'react-router-dom'
+
+const SingIn = ({  }) => {
 	return (
 		<div id="logo">
 			<center>
@@ -20,8 +28,10 @@ const SingIn = ({ dish, index }) => {
               <FormControl id="n" type="text" placeholder = "add comments" />
             </InputGroup>
           </FormGroup>
-          <button type="submit" name="submit" value="submit">POST COMMENT</button>
+          <button type="submit" name="submit" value="submit">SING IN</button>
+          
         </form>
+         <NavLink to="/sing_up" className='text-navlink'>Createnow account</NavLink>
             </center>
 			
 		</div>
