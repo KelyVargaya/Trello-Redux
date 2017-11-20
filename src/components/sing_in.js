@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './sing_in.css';
 import {Button, FormGroup, FormControl, InputGroup } from 'react-bootstrap';
-import logo from './img/logito.png';
+import logo from '../img/logito.png';
 import {
 	BrowserRouter,
 	Route,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './sing_in.css';
 import {Button, From, FormGroup, FormControl, InputGroup } from 'react-bootstrap';
 import {NavLink} from 'react-router-dom'
-import logo from './img/logito.png';
+import logo from '../img/logito.png';
 
 const SingUp = ({}) => {
   return (

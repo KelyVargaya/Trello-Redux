@@ -4,9 +4,9 @@ import {BrowserRouter,Route,Switch,Redirect,Nav,NavLink} from 'react-router-dom'
 import {Button, FormGroup, FormControl, InputGroup } from 'react-bootstrap';
 import {connect} from 'redux-zero/react';
 import './App.css';
-import SingIn from './sing_in.js';
-import SingUp from './sing_up.js';
-import Boards from './board.js'
+import SingIn from './components/sing_in.js';
+import SingUp from './components/sing_up.js';
+import Boards from './components/Board/Board.js';
 
 
 const App = ({ stages, tasks }) => {

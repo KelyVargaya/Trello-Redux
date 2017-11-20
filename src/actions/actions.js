@@ -1,6 +1,8 @@
-import store from "./store";
-import firebase from "firebase";
-  // Initialize Firebase
+
+import store from '../store/store'
+import firebase from 'firebase';
+
+// Initialize Firebase
   var config = {
     apiKey: "AIzaSyAlCAsfw5TynGfg7nlVKNZyQAjNEvwwSZA",
     authDomain: "trello-37318.firebaseapp.com",
@@ -10,7 +12,6 @@ import firebase from "firebase";
     messagingSenderId: "970243208143"
   };
   firebase.initializeApp(config);
-
 
 export function readBoard () {
    firebase.database().ref('stages').on ('value', res => {
