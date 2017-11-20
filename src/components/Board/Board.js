@@ -23,21 +23,23 @@ const Board = ({stages, tasks}) => {
              <h4><Glyphicon glyph="user" />My Boards</h4>
 
           <div className="cajita">
-            Add new list
-             {list}
-          </div>
+          {list}
 
-          <div>
+           <div className="cajabtn">
             <form onSubmit = { (e) => {
                e.preventDefault();
                addStage (this.stageInputRef.value);
             }}>
+             Add new list... <br/>
                <input type="text" ref = {e => this.stageInputRef = e}/>
                <button type="submit">
                   save list
                </button>
                </form>
             </div>
+          </div>
+
+         
       </div>
    ); 
 }

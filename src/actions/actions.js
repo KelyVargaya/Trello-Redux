@@ -41,18 +41,11 @@ export function  addStage (text) {
 
    let stages = [...store.getState().stages];
    stages.push (  text )
-   /*store.setState ({
-      stages : stages
-   })  */
-
    firebase.database().ref('stages').push (text);
 }
 
 export function  addTask (stage, text) {
-   console.log ('addTask:', stage + ' - ' +  text);
-
    let tasks = [...store.getState().tasks];
-
    let newTask = {
       id : store.getState().tasks.length,
       title: text,
@@ -60,8 +53,4 @@ export function  addTask (stage, text) {
    } 
 
    firebase.database().ref('tasks/' + newTask.id).set (newTask);
-   /*
-   store.setState ({
-      tasks : tasks
-   })  */
 }
