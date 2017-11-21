@@ -2,7 +2,7 @@
   "name": "trello-redux",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kelyvargaya.github.io/Promises-Planetas/",
+  "homepage": "https://kelyvargaya.github.io/Trello-Redux/",
   "dependencies": {
     "firebase" : "^4.6.2",
     "react": "^16.0.0",
