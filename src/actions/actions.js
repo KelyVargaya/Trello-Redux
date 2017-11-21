@@ -18,16 +18,18 @@ const auth = firebase.auth();
 const storage = firebase.storage();
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-
-export function signUp (fullname, email, pass) 
+export function signUp (fullname, email, pass, survey, question, options) 
 {
    console.log ('signUp' + fullname + email + pass);
 
    auth.createUserWithEmailAndPassword (email, pass).then ( user => {
       let newuser = {
-         fullname, email
+         fullname, email, survey, question, options
       }
-      database.ref ('users/' + user.uid).set (newuser);     
+      database.ref ('users/' + user.uid).set (newuser);   
+
+     // database.ref ('users/' + user.uid + '/options').update ( 'option1, option2, option3...');   
+     //  database.ref ('users/').push (newuser);   
       
       database.ref ('users/' + user.uid).once ('value').then ( res => {
          const fullUserInfo = res.val(); 
@@ -37,12 +39,16 @@ export function signUp (fullname, email, pass)
             user: {
                id : user.uid,
                email :  fullUserInfo.email,
-               fullname :  fullUserInfo.fullname,               
+               fullname :  fullUserInfo.fullname,
+               survey :  fullUserInfo.survey,
+               question :  fullUserInfo.question,
+               options :  fullUserInfo.options               
             }
          })
       })
 
-   }) 
+   })
+   
 }
 
 export function signOut () {
@@ -67,7 +73,10 @@ export function signIn (user, pass) {
             user: {
                id : userObj.uid,
                email :  fullUserInfo.email,
-               fullname :  fullUserInfo.fullname,               
+               fullname :  fullUserInfo.fullname,
+               survey :  fullUserInfo.survey,
+               question :  fullUserInfo.question,
+               options :  fullUserInfo.options               
             }
          })
       })
@@ -85,7 +94,6 @@ auth.onAuthStateChanged(user => {
       })
    }
 });
-
 
 /*Agregar los Boards*/
 export function readBoard () {

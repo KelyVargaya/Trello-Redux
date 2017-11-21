@@ -16,7 +16,7 @@ const SingUp = ({successLogin}) => {
         <form onSubmit =  {
                e => {
                   e.preventDefault();
-                  signUp(this.fullNameRef.value, this.emailRef.value, this.passwordRef.value); 
+                  signUp(this.fullName.value, this.email.value, this.pass.value); 
                }}>
         
           <FormGroup>
