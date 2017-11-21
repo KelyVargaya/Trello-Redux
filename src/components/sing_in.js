@@ -16,17 +16,17 @@ const SingIn = ({ successLogin }) => {
         <form onSubmit = {
             e => {
                e.preventDefault();
-               signIn( this.emailInputRef.value,  this.passwordInputRef.value);
+               signIn( this.user.value,  this.password.value);
             }
          } >
           <FormGroup>
             <InputGroup className="input">
-              <FormControl  id="n" type="text" placeholder = "add name" inputref = { ref => {this.emailInputRef = ref}}  />
+              <FormControl  id="n" type="text" placeholder = "add name" inputref = { ref => {this.user = ref}}  />
             </InputGroup>
           </FormGroup>
           <FormGroup>
             <InputGroup className="input">
-              <FormControl id="n" type="text" placeholder = "password"  inputref = { ref => {this.passwordInputRef = ref}}/>
+              <FormControl id="n" type="text" placeholder = "password"  inputref = { ref => {this.password = ref}}/>
             </InputGroup>
           </FormGroup>
         

@@ -10,131 +10,120 @@ import firebase from 'firebase';
     projectId: "trello-37318",
     storageBucket: "trello-37318.appspot.com",
     messagingSenderId: "970243208143"
-  };
-  firebase.initializeApp(config);
+    };
+    firebase.initializeApp(config);
 
-const database = firebase.database();
-const auth = firebase.auth();
-const storage = firebase.storage();
-const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-
-export function signUp (fullname, email, pass, survey, question, options) 
-{
-   console.log ('signUp' + fullname + email + pass);
-
-   auth.createUserWithEmailAndPassword (email, pass).then ( user => {
-      let newuser = {
-         fullname, email, survey, question, options
-      }
-      database.ref ('users/' + user.uid).set (newuser);   
-
-     // database.ref ('users/' + user.uid + '/options').update ( 'option1, option2, option3...');   
-     //  database.ref ('users/').push (newuser);   
-      
-      database.ref ('users/' + user.uid).once ('value').then ( res => {
-         const fullUserInfo = res.val(); 
-
-         console.log ('full info ', fullUserInfo);
-         store.setState ( {
-            user: {
-               id : user.uid,
-               email :  fullUserInfo.email,
-               fullname :  fullUserInfo.fullname,
-               survey :  fullUserInfo.survey,
-               question :  fullUserInfo.question,
-               options :  fullUserInfo.options               
-            }
-         })
-      })
-
-   })
-   
-}
-
-export function signOut () {
-   auth.signOut();
-   store.setState ( {
-      successLogin : false,
-      user: {
-         id :'',
-         email :  ''
-      }
-   })
-}
-
-export function signIn (user, pass) {
-   auth.signInWithEmailAndPassword(user, pass).then (userObj => {
-
-      database.ref ('users/' + userObj.uid).once ('value').then ( res => {
-         const fullUserInfo = res.val(); 
-
-         console.log ('full info ', fullUserInfo);
-         store.setState ( {
-            user: {
-               id : userObj.uid,
-               email :  fullUserInfo.email,
-               fullname :  fullUserInfo.fullname,
-               survey :  fullUserInfo.survey,
-               question :  fullUserInfo.question,
-               options :  fullUserInfo.options               
-            }
-         })
-      })
-   })
-}
+    const database = firebase.database();
+    const auth = firebase.auth();
+    const storage = firebase.storage();
+    const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 
-auth.onAuthStateChanged(user => {
-   if (user) {
-      console.log('user', user);
-      let usersRef = database.ref('/users');
-      let userRef = usersRef.child(user.uid);
+    export function signUp (firstName, lastName, email, password) 
+    {
+      console.log ('signUp' + firstName + email + password);
+
+      auth.createUserWithEmailAndPassword (email, password).then ( user => {
+          let newuser = {
+            firstName, email, password
+          }
+          database.ref ('users/' + user.uid).set (newuser);     
+          database.ref ('users/' + user.uid).once ('value').then ( res => {
+          
+          const fullUserInfo = res.val(); 
+            console.log ('full info ', fullUserInfo);
+            store.setState ( {
+                user: {
+                  id : user.uid,
+                  email :  fullUserInfo.email,
+                  firstName :  fullUserInfo.firstName,               
+                }
+            })
+          })
+      }) 
+    }
+
+    export function signOut () {
+      auth.signOut();
       store.setState ( {
-         successLogin : true
+          successLogin : false,
+          user: {
+            id :'',
+            email :  ''
+          }
       })
-   }
-});
+    }
 
-/*Agregar los Boards*/
-export function readBoard () {
-   firebase.database().ref('stages').on ('value', res => {
-      let stages = []
-      res.forEach ( snap  => {
-         const stage = snap.val();
-         stages.push (stage);
+    export function signIn (user, password) {
+      auth.signInWithEmailAndPassword(user, password).then (userObj => {
+
+          database.ref ('users/' + userObj.uid).once ('value').then ( res => {
+            const fullUserInfo = res.val(); 
+
+            console.log ('full info ', fullUserInfo);
+            store.setState ( {
+                user: {
+                  id : userObj.uid,
+                  email :  fullUserInfo.email,
+                  firstName :  fullUserInfo.firstName,              
+                }
+            })
+          })
       })
-      store.setState ({
-         stages : stages
-      }) 
-   });
+    }
 
-   firebase.database().ref('tasks').on ('value', res => {
-      let tasks = [];
-      res.forEach ( snap  => {
-          const task = snap.val();
-          tasks.push (task)
-      })      
-      store.setState ({
-         tasks : tasks
-      }) 
-   });   
-}
+    auth.onAuthStateChanged(user => {
+      if (user) {
+          console.log('user', user);
+          let usersRef = database.ref('/users');
+          let userRef = usersRef.child(user.uid);
+          store.setState ( {
+            successLogin : true
+          })
+      }
+    });
 
-export function  addStage (text) {
 
-   let stages = [...store.getState().stages];
-   stages.push (  text )
-   firebase.database().ref('stages').push (text);
-}
+    /*Agregar los Boards*/
+    export function readBoard () {
+      firebase.database().ref('stages').on ('value', res => {
+          let stages = []
+          res.forEach ( snap  => {
+            const stage = snap.val();
+            stages.push (stage);
+          })
+          store.setState ({
+            stages : stages
+          }) 
+      });
 
-export function  addTask (stage, text) {
-   let tasks = [...store.getState().tasks];
-   let newTask = {
-      id : store.getState().tasks.length,
-      title: text,
-      stage : stage
-   } 
+      firebase.database().ref('tasks').on ('value', res => {
+          let tasks = [];
+          res.forEach ( snap  => {
+              const task = snap.val();
+              tasks.push (task)
+          })      
+          store.setState ({
+            tasks : tasks
+          }) 
+      });   
+    }
 
-   firebase.database().ref('tasks/' + newTask.id).set (newTask);
-}
-/*hasta aqui la parte de los boards*/
+    export function  addStage (text) {
+
+      let stages = [...store.getState().stages];
+      stages.push (  text )
+      firebase.database().ref('stages').push (text);
+    }
+
+    export function  addTask (stage, text) {
+      let tasks = [...store.getState().tasks];
+      let newTask = {
+          id : store.getState().tasks.length,
+          title: text,
+          stage : stage
+      } 
+
+      firebase.database().ref('tasks/' + newTask.id).set (newTask);
+    }
+    /*hasta aqui la parte de los boards*/

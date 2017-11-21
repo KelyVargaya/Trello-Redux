@@ -7,10 +7,8 @@ const initialState = {
    user : {
       id : null,
       email :  null,
-      fullname :  null,
-      survey :  null,
-      question :  null,
-      options :  null            
+      firstName :  null,
+      lastName :  null,          
    }  
 }
 
